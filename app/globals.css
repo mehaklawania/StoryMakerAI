@@ -2,26 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
   }
 }
 
+/* Improve accessibility */
+*:focus-visible {
+  outline: 2px solid theme('colors.indigo.500');
+  outline-offset: 2px;
+}
+
+/* Improve touch targets */
+button, 
+a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improve text readability */
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.prose {
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, #6366f180 1px, transparent 1px),
+    linear-gradient(to bottom, #6366f180 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Add to your existing styles */
+textarea {
+  background-image: linear-gradient(to bottom, transparent, transparent);
+  transition: all 0.2s ease;
+}
+
+textarea:focus {
+  background-image: linear-gradient(to bottom, rgba(99, 102, 241, 0.05), transparent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.prompt-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(99, 102, 241, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 100%
+  );
+}
+
+/* Add to your existing styles */
+.preference-card {
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.preference-card:hover {
+  transform: translateY(-2px);
+}
+
+.option-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.option-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(99, 102, 241, 0.1),
+    rgba(168, 85, 247, 0.1)
+  );
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.option-button:hover::before {
+  opacity: 1;
 }
