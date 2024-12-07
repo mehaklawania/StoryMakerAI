@@ -15,12 +15,12 @@ type StoryPreferences = {
 }
 
 // Add analytics interface
-interface Analytics {
-  storiesGenerated: number
-  averageLength: number
-  popularGenre: string
-  lastGenerated: Date | null
-}
+// interface Analytics {
+//   storiesGenerated: number
+//   averageLength: number
+//   popularGenre: string
+//   lastGenerated: Date | null
+// }
 
 // First, let's define a consistent animation system at the top of the file
 const animations = {
@@ -231,7 +231,7 @@ export default function Home() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, ...preferences }),
+        body: JSON.stringify({ fullPrompt, ...preferences }),
       })
       
       if (!response.ok) {
@@ -476,7 +476,7 @@ export default function Home() {
         <div className="flex items-center justify-between mb-8">
           <div className="space-y-1">
             <h2 className="text-2xl font-semibold text-gray-900">Story Preferences</h2>
-            <p className="text-sm text-gray-500">Customize your story's characteristics</p>
+            <p className="text-sm text-gray-500">Customize your story&apos;s characteristics</p>
           </div>
           <div className="flex gap-2">
             <motion.button
