@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { RadioGroup } from '@headlessui/react'
-import { Loader2, Info, BookOpen, Clock, Hash, Heart, TextQuote, Pen, Sparkles, Lightbulb, Trash2, Shuffle, MessageCircle, Map } from 'lucide-react'
+
+import { Loader2, BookOpen, Heart, TextQuote, Pen, Sparkles, Lightbulb, Trash2, Shuffle, MessageCircle, Map } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 type StoryPreferences = {
@@ -149,8 +149,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [story, setStory] = useState('')
   const [error, setError] = useState('')
-  const [showPrompt, setShowPrompt] = useState(false)
-  const [lastPrompt, setLastPrompt] = useState('')
+  // const [ setShowPrompt] = useState(false)
+  // const [ setLastPrompt] = useState('')
   const [preferences, setPreferences] = useState<StoryPreferences>({
     mood: '',
     length: '',
@@ -159,12 +159,12 @@ export default function Home() {
     tone: '',
     setting: ''
   })
-  const [analytics, setAnalytics] = useState<Analytics>({
-    storiesGenerated: 0,
-    averageLength: 0,
-    popularGenre: '',
-    lastGenerated: null
-  })
+  // const [analytics, setAnalytics] = useState<Analytics>({
+  //   storiesGenerated: 0,
+  //   averageLength: 0,
+  //   popularGenre: '',
+  //   lastGenerated: null
+  // })
   const [charCount, setCharCount] = useState(0)
 
   // Example prompts for user guidance
@@ -225,7 +225,7 @@ export default function Home() {
       It should be a ${preferences.genre.toLowerCase()} genre and approximately ${preferences.length.toLowerCase()} words.
       The tone should be ${preferences.tone.toLowerCase()} and the setting should be ${preferences.setting.toLowerCase()}.
       Additional details: ${prompt}`
-    setLastPrompt(fullPrompt)
+    // setLastPrompt(fullPrompt)
     
     try {
       const response = await fetch('/api/generate', {
@@ -244,15 +244,15 @@ export default function Home() {
       }
       
       setStory(data.story)
-      setShowPrompt(true)
+      // setShowPrompt(true)
       
       // Update analytics
-      setAnalytics(prev => ({
-        storiesGenerated: prev.storiesGenerated + 1,
-        averageLength: Math.round((prev.averageLength * prev.storiesGenerated + data.story.length) / (prev.storiesGenerated + 1)),
-        popularGenre: preferences.genre,
-        lastGenerated: new Date()
-      }))
+      // setAnalytics(prev => ({
+      //   storiesGenerated: prev.storiesGenerated + 1,
+      //   averageLength: Math.round((prev.averageLength * prev.storiesGenerated + data.story.length) / (prev.storiesGenerated + 1)),
+      //   popularGenre: preferences.genre,
+      //   lastGenerated: new Date()
+      // }))
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Failed to generate story')
     } finally {
